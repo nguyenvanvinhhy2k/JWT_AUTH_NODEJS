@@ -6,16 +6,12 @@ const bookController = {
     try {
       const newBook = new Book(req.body);
       const addBook = await newBook.save();
-      if (req.body.author) {
-        const author = Author.findById(req.body.author);
-        await author.updateOne({ $push: { books: saveBook._id } });
-      }
       res.status(200).json(addBook);
     } catch (error) {
       res.status(500).json(error);
     }
   },
-  //GET ALL BOOK
+  // GET ALL BOOK
   getallBooks: async (req, res) => {
     try {
       const books = await Book.find();
@@ -24,7 +20,7 @@ const bookController = {
       res.status(500).json(error);
     }
   },
-  //GET A BOOK
+  // GET A BOOK
   getAnBook: async (req, res) => {
     try {
       const book = await Book.findById(req.params.id);

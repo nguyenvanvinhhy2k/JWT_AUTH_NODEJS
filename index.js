@@ -20,9 +20,11 @@ app.use(express.json());
 app.use(morgan("combined"));
 app.use(bodyParser.json());
 
+// Routers
 app.use("/author", authorRoute);
 app.use("/book", bookRoute);
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Welcome to my api rest" });
 });
+
 app.listen(port, () => console.log(`http://localhost:${port}`));

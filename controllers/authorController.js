@@ -6,6 +6,10 @@ const authorController = {
     try {
       const newAuthor = new Author(req.body);
       const saveAuthor = await newAuthor.save();
+      if (req.body.author) {
+        const author = Book.findById(req.body.author);
+        await author.updateOne({ $push: { author: saveAuthor._id } });
+      }
       res.status(200).json(saveAuthor);
     } catch (error) {
       res.status(500).json(error);
@@ -21,7 +25,7 @@ const authorController = {
       res.status(500).json(error);
     }
   },
-  //GET A AUTHOR
+  // GET A AUTHOR
   getAnAuthor: async (req, res) => {
     try {
       const author = await Author.findById(req.params.id);
@@ -30,7 +34,7 @@ const authorController = {
       res.status(500).json(error);
     }
   },
-  //UPDATE AUTHOR
+  // UPDATE AUTHOR
   updateAuthor: async (req, res) => {
     try {
       const author = Author.findById(req.params.id);
@@ -40,7 +44,7 @@ const authorController = {
       res.status(500).json(error);
     }
   },
-  //DELETE AUTHOR
+  // DELETE AUTHOR
   deleteAuthor: async (req, res) => {
     try {
       await Author.findByIdAndDelete(req.params.id);
