@@ -1,5 +1,20 @@
 const mongoose = require("mongoose");
 
+const movieSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  movieID: {
+    type: Number,
+    required: true,
+  },
+  url: {
+    type: String,
+    required: true,
+  },
+});
+
 const authorSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -7,7 +22,7 @@ const authorSchema = new mongoose.Schema({
   },
   year: {
     type: Number,
-    required: true, 
+    required: true,
   },
   books: [
     {
@@ -36,5 +51,6 @@ const bookSchema = new mongoose.Schema({
 
 let Book = mongoose.model("Book", bookSchema);
 let Author = mongoose.model("Author", authorSchema);
+let Movie = mongoose.model("Movie", movieSchema);
 
-module.exports = { Book, Author };
+module.exports = { Book, Author, Movie };

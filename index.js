@@ -9,6 +9,7 @@ const dotenv = require("dotenv");
 const port = 8000;
 const authorRoute = require("./routes/author");
 const bookRoute = require("./routes/book");
+const movieRoute = require("./routes/movie");
 
 dotenv.config();
 mongoose.connect(process.env.MONGO_URL, () => {
@@ -23,6 +24,7 @@ app.use(bodyParser.json());
 // Routers
 app.use("/author", authorRoute);
 app.use("/book", bookRoute);
+app.use("/film", movieRoute);
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to my api rest" });
 });
